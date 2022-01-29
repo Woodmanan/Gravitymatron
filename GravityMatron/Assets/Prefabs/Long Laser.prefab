@@ -105,6 +105,10 @@ MonoBehaviour:
   initialDelay: 0
   holdTime: 5
   repeatAfter: 0
+  activeColor: {r: 1, g: 0, b: 0, a: 1}
+  inactiveColor: {r: 0, g: 0.6779218, b: 1, a: 1}
+  activeGlowIntensity: 3
+  inactiveGlowIntensity: 1
 --- !u!120 &4465384683711174756
 LineRenderer:
   m_ObjectHideFlags: 0

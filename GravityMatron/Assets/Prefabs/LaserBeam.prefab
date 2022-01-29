@@ -51,6 +51,10 @@ MonoBehaviour:
   end: {x: 1, y: 0}
   speed: 4
   length: 2
+  activeColor: {r: 1, g: 0, b: 0, a: 1}
+  inactiveColor: {r: 0, g: 0.7102506, b: 1, a: 1}
+  activeGlowIntensity: 3
+  inactiveGlowIntensity: 1
 --- !u!61 &8382783512017281939
 BoxCollider2D:
   m_ObjectHideFlags: 0
