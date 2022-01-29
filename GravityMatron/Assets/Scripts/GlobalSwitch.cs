@@ -5,12 +5,18 @@ using UnityEngine.Events;
 
 public class GlobalSwitch 
 {
-    public static UnityAction<bool> SwitchModes;
-    public static bool currentMode;
+    public static UnityAction<SwitchMode> SwitchModes;
+    public static SwitchMode currentMode;
 
-    public static void SwitchModeTo(bool mode)
+    public static void SwitchModeTo(SwitchMode mode)
     {
         currentMode = mode;
         SwitchModes.Invoke(mode);
     }
+}
+
+public enum SwitchMode
+{
+    TopDown,
+    SideScroller
 }
