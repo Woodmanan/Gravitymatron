@@ -6,6 +6,8 @@ public class Basic: Turret
 {
     public override void Attack()
     {
+        base.Attack();
+
         FireBullet(0);
     }
 }

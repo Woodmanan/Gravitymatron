@@ -12,6 +12,7 @@ public abstract class Turret : MonoBehaviour
     public float attackInterval;
 
     private GameObject target;
+    public PlayerController playerController;
     private Transform firePosition;
     private float timePassed;
 
@@ -22,6 +23,7 @@ public abstract class Turret : MonoBehaviour
     {
         firePosition = transform.GetChild(0);
         target = GameObject.FindGameObjectWithTag("Player");
+        playerController = target.GetComponent<PlayerController>();
         timePassed = 0;
     }
 
@@ -37,7 +39,11 @@ public abstract class Turret : MonoBehaviour
         if (timePassed > attackInterval)
         {
             timePassed = 0;
-            Attack();
+            float distance = Mathf.Abs(target.transform.position.y - transform.position.y);
+            if (!playerController.canToggleModes && distance < 14)
+            {
+                Attack();
+            }
         }
     }
 
@@ -73,5 +79,8 @@ public abstract class Turret : MonoBehaviour
         newBullet.GetComponent<Bullet>().Initialize(newDir, bulletSpeed, activeMode);
     }
 
-    public abstract void Attack();
+    public virtual void Attack()
+    {
+        
+    }
 }
