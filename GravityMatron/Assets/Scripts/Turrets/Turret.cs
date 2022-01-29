@@ -9,9 +9,11 @@ public abstract class Turret : MonoBehaviour
     public SwitchMode activeMode;
     public bool followPlayer;
     public float rotationSpeed;
+    public float attackInterval;
 
     private GameObject target;
     private Transform firePosition;
+    private float timePassed;
 
     private float angle;
 
@@ -20,13 +22,20 @@ public abstract class Turret : MonoBehaviour
     {
         firePosition = transform.GetChild(0);
         target = GameObject.FindGameObjectWithTag("Player");
+        timePassed = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (GlobalSwitch.currentMode == activeMode)
         {
+            timePassed += Time.deltaTime;
+        }
+
+        if (timePassed > attackInterval)
+        {
+            timePassed = 0;
             Attack();
         }
 
