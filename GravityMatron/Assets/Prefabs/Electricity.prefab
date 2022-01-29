@@ -135,6 +135,7 @@ MonoBehaviour:
   width: 0.91
   activeColor: {r: 1, g: 0, b: 0, a: 1}
   inactiveColor: {r: 0, g: 1, b: 0.96775126, a: 0}
+  playerInside: 0
 --- !u!212 &7538555192587860488
 SpriteRenderer:
   m_ObjectHideFlags: 0
