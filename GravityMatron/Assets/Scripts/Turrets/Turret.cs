@@ -31,6 +31,7 @@ public abstract class Turret : MonoBehaviour
         if (GlobalSwitch.currentMode == activeMode)
         {
             timePassed += Time.deltaTime;
+            Rotate();
         }
 
         if (timePassed > attackInterval)
@@ -38,9 +39,6 @@ public abstract class Turret : MonoBehaviour
             timePassed = 0;
             Attack();
         }
-
-
-        Rotate();
     }
 
     public void Rotate()

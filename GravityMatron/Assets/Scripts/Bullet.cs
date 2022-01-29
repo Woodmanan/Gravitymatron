@@ -32,6 +32,7 @@ public class Bullet : MonoBehaviour
     {
         if (newMode == activeMode)
         {
+            gameObject.layer = 8;
             rb2d.bodyType = RigidbodyType2D.Dynamic;
             if (touching)
             {
@@ -42,6 +43,7 @@ public class Bullet : MonoBehaviour
         else
         {
             rb2d.bodyType = RigidbodyType2D.Static;
+            gameObject.layer = 3;
         }
     }
 
