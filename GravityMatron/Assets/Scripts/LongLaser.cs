@@ -9,8 +9,9 @@ public class LongLaser : MonoBehaviour
     Vector2 end;
     public Vector2 direction;
     public float maxDist;
-    public float timeToSpan;
     public float width;
+    public float timeToSpan;
+    public float initialDelay;
     public float holdTime;
     public float repeatAfter;
 
@@ -38,7 +39,7 @@ public class LongLaser : MonoBehaviour
         else
         {
             collider.isTrigger = false;
-            gameObject.layer = 9; //Semisolid
+            gameObject.layer = 10; //Semisolid
         }
     }
 
@@ -67,7 +68,12 @@ public class LongLaser : MonoBehaviour
 
     IEnumerator ExtendLaser()
     {
-        while(true)
+        for (float t = 0; t < initialDelay; t += Time.deltaTime)
+        {
+            yield return null;
+        }
+
+        while (true)
         {
             if (timeToSpan == 0)
             {
@@ -112,6 +118,7 @@ public class LongLaser : MonoBehaviour
                 renderer.SetPosition(1, end);
                 collider.size = new Vector2(Mathf.Abs(start.x - end.x), Mathf.Abs(start.y - end.y));
                 collider.offset = collider.size / 2;
+                collider.offset *= direction;
 
                 if (collider.size.x == 0)
                 {
@@ -131,7 +138,9 @@ public class LongLaser : MonoBehaviour
                 //Draw in the laser
                 renderer.SetPosition(1, end);
                 collider.size = new Vector2(Mathf.Abs(start.x - end.x), Mathf.Abs(start.y - end.y));
+
                 collider.offset = collider.size / 2;
+                collider.offset *= direction;
 
                 if (collider.size.x == 0)
                 {

@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
                 //Switch to semisolid mode if we're jumping!
                 if (_body.velocity.y > .1f)
                 {
-                    gameObject.layer = 8; //NoSemisolidInteraction
+                    gameObject.layer = 9; //NoSemisolidInteraction
                 }
                 else
                 {
@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
                 if (phaseTime > 0)
                 {
-                    gameObject.layer = 8;
+                    gameObject.layer = 9; //NoSemisolidInteraction
                     phaseTime -= Time.deltaTime;
                 }
                 break;
