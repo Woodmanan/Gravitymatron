@@ -93,5 +93,6 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = respawnPosition;
         _body.velocity = Vector2.zero;
+        GlobalSwitch.SwitchModeTo(SwitchMode.TopDown);
     }
 }
