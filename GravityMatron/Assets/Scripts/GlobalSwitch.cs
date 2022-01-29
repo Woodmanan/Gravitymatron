@@ -25,8 +25,9 @@ public class GlobalSwitch
     }
 }
 
+[System.Flags]
 public enum SwitchMode
 {
-    TopDown,
-    SideScroller
+    TopDown         = (1 << 0),
+    SideScroller    = (1 << 1)
 }
