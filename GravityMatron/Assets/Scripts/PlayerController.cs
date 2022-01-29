@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     public float maxSpeed;
     public float jumpSpeed;
+    // set to true when picking up GravityMatron
+    public bool canToggleModes = false;
 
     [SerializeField] private KeyCode jumpKey;
     [SerializeField] private KeyCode switchModeKey;
@@ -43,7 +45,7 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
-        if (Input.GetKeyDown(switchModeKey))
+        if (Input.GetKeyDown(switchModeKey) && canToggleModes)
         {
             switch (GlobalSwitch.currentMode)
             {
@@ -61,12 +63,11 @@ public class PlayerController : MonoBehaviour
     {
         return Physics2D.BoxCast(
             transform.position, 
-            new Vector2(0.1f, 0.1f),
+            new Vector2(1.0f, 1.0f),
             0.0f, 
             Vector2.down, 
             1.5f,
-            LayerMask.GetMask("Jumpable"
-        )
+            LayerMask.GetMask("Jumpable")
         ).collider != null;
     }
 
