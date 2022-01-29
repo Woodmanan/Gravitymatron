@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,7 +5,7 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed;
     public float jumpSpeed;
     // set to true when picking up GravityMatron
-    public bool canToggleModes = false;
+    public bool canToggleModes;
     // set to room's respawn point upon entering room
     public Vector3 respawnPosition;
 
@@ -16,12 +13,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private KeyCode switchModeKey;
 
     private Rigidbody2D _body;
+    private Animator _anim;
     private float _gravity;
-    float phaseTime = 0;
+    private float _phaseTime;
 
     private void Start()
     {
         _body = GetComponent<Rigidbody2D>();
+        _anim = transform.GetChild(0).GetComponent<Animator>();
         _gravity = _body.gravityScale;
         respawnPosition = transform.position;
     }
@@ -35,11 +34,22 @@ public class PlayerController : MonoBehaviour
         {
             case SwitchMode.TopDown:
                 _body.gravityScale = 0.0f;
+                _anim.SetBool("SideOrTop", true);
+                if (x != 0.0 || y != 0.0)
+                {
+                    _anim.SetFloat("Direction", Mathf.Rad2Deg * Mathf.Atan2(y, x));
+                }
 
                 _body.velocity = new Vector2(x, y) * maxSpeed;
                 break;
             case SwitchMode.SideScroller:
                 _body.gravityScale = _gravity;
+                _anim.SetBool("SideOrTop", false);
+                _anim.SetFloat("Walking", x != 0.0f ? 1.0f : 0.0f);
+                if (x != 0.0)
+                {
+                    _anim.SetBool("LeftOrRight", x > 0.0f);
+                }
 
                 var vy = _body.velocity.y;
                 if (Input.GetKeyDown(jumpKey) && IsGrounded())
@@ -64,14 +74,14 @@ public class PlayerController : MonoBehaviour
 
                 if (Input.GetKey(jumpKey) && y < -.1f)
                 {
-                    phaseTime = .2f;
+                    _phaseTime = .2f;
                     
                 }
 
-                if (phaseTime > 0)
+                if (_phaseTime > 0)
                 {
                     gameObject.layer = 9; //NoSemisolidInteraction
-                    phaseTime -= Time.deltaTime;
+                    _phaseTime -= Time.deltaTime;
                 }
                 break;
         }
@@ -82,6 +92,8 @@ public class PlayerController : MonoBehaviour
             {
                 case SwitchMode.SideScroller:
                     GlobalSwitch.SwitchModeTo(SwitchMode.TopDown);
+                    var xform = transform;
+                    xform.position += new Vector3(0.0f, 0.01f, 0.0f);
                     break;
                 case SwitchMode.TopDown:
                     GlobalSwitch.SwitchModeTo(SwitchMode.SideScroller);
