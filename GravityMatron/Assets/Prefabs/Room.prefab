@@ -80,6 +80,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8593221200577639984}
+  - component: {fileID: 1410082358238837260}
   m_Layer: 0
   m_Name: RespawnPoint
   m_TagString: Untagged
@@ -101,3 +102,15 @@ Transform:
   m_Father: {fileID: 775043457141100629}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1410082358238837260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3383879479544740230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 680cd77fc5be8c94592c8c7106aa886d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

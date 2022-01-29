@@ -9,14 +9,16 @@ public class LongLaser : MonoBehaviour
     Vector2 end;
     public Vector2 direction;
     public float maxDist;
-    public float timeToSpan;
     public float width;
+    public float timeToSpan;
+    public float initialDelay;
     public float holdTime;
     public float repeatAfter;
 
     // Start is called before the first frame update
     void Start()
     {
+        GlobalSwitch.SwitchModes += Freeze;
         StartCoroutine(MainRoutine());
     }
 
@@ -24,6 +26,21 @@ public class LongLaser : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void Freeze(SwitchMode newMode)
+    {
+        BoxCollider2D collider = GetComponent<BoxCollider2D>();
+        if ((newMode & activeMode) > 0)
+        {
+            collider.isTrigger = true;
+            gameObject.layer = 0; //Default
+        }
+        else
+        {
+            collider.isTrigger = false;
+            gameObject.layer = 10; //Semisolid
+        }
     }
 
     IEnumerator MainRoutine()
@@ -51,7 +68,12 @@ public class LongLaser : MonoBehaviour
 
     IEnumerator ExtendLaser()
     {
-        while(true)
+        for (float t = 0; t < initialDelay; t += Time.deltaTime)
+        {
+            yield return null;
+        }
+
+        while (true)
         {
             if (timeToSpan == 0)
             {
@@ -96,6 +118,7 @@ public class LongLaser : MonoBehaviour
                 renderer.SetPosition(1, end);
                 collider.size = new Vector2(Mathf.Abs(start.x - end.x), Mathf.Abs(start.y - end.y));
                 collider.offset = collider.size / 2;
+                collider.offset *= direction;
 
                 if (collider.size.x == 0)
                 {
@@ -115,7 +138,9 @@ public class LongLaser : MonoBehaviour
                 //Draw in the laser
                 renderer.SetPosition(1, end);
                 collider.size = new Vector2(Mathf.Abs(start.x - end.x), Mathf.Abs(start.y - end.y));
+
                 collider.offset = collider.size / 2;
+                collider.offset *= direction;
 
                 if (collider.size.x == 0)
                 {
@@ -147,5 +172,24 @@ public class LongLaser : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position + (Vector3)(direction.normalized * 2));
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag.Equals("Player"))
+        {
+            Debug.Log("Killing player!");
+            collision.GetComponent<PlayerController>().Kill();
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Player"))
+        {
+            Debug.Log("Touched the player!");
+        }
+    }
+
+
 
 }
