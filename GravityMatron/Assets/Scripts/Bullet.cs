@@ -8,8 +8,6 @@ public class Bullet : MonoBehaviour
     private float speed;
     private SwitchMode activeMode;
 
-    private bool touching;
-
     private Rigidbody2D rb2d;
     
     // Start is called before the first frame update
@@ -26,7 +24,6 @@ public class Bullet : MonoBehaviour
         this.activeMode = activeMode;
         rb2d.bodyType = RigidbodyType2D.Dynamic;
         rb2d.velocity = direction * speed;
-        touching = false;
     }
 
     public void OnStateChanged(SwitchMode newMode)
@@ -50,17 +47,14 @@ public class Bullet : MonoBehaviour
         {
             if (collision.gameObject.tag == "Player")
             {
-                Debug.Log("Killing player!");
                 collision.gameObject.GetComponent<PlayerController>().Kill();
             }
 
-            BulletPool.Instance.StoreBullet(gameObject);
+            if (gameObject.layer == 8)
+            {
+                BulletPool.Instance.StoreBullet(gameObject);
+            }
         }
-    }
-
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        touching = false;
     }
 
 }
