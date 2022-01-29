@@ -20,6 +20,7 @@ public class LongLaser : MonoBehaviour
     {
         GlobalSwitch.SwitchModes += Freeze;
         StartCoroutine(MainRoutine());
+        GetComponent<LineRenderer>().useWorldSpace = true;
     }
 
     // Update is called once per frame
