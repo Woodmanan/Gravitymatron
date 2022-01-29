@@ -395,11 +395,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7372af5bdd4c5b44391b4818133157b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeMode: -1
   direction: {x: 1, y: 0}
   maxDist: 1000
-  speed: 5
+  timeToSpan: 0.5
   width: 0.5
   holdTime: 5
+  repeatAfter: 0
 --- !u!212 &1825224660
 SpriteRenderer:
   m_ObjectHideFlags: 0
