@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     public float jumpSpeed;
     // set to true when picking up GravityMatron
     public bool canToggleModes = false;
+    // set to room's respawn point upon entering room
+    public Vector3 respawnPosition;
 
     [SerializeField] private KeyCode jumpKey;
     [SerializeField] private KeyCode switchModeKey;
@@ -19,6 +21,7 @@ public class PlayerController : MonoBehaviour
     {
         _body = GetComponent<Rigidbody2D>();
         _gravity = _body.gravityScale;
+        respawnPosition = transform.position;
     }
 
     private void Update()
@@ -57,6 +60,11 @@ public class PlayerController : MonoBehaviour
                     break;
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Kill();
+        }
     }
 
     private bool IsGrounded()
@@ -78,5 +86,12 @@ public class PlayerController : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(transform.position, new Vector3(1.0f, 1.0f, 1.0f));
         }
+    }
+
+    // Callback to cause the player to respawn at the start of the room
+    public void Kill()
+    {
+        transform.position = respawnPosition;
+        _body.velocity = Vector2.zero;
     }
 }
