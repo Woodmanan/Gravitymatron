@@ -24,6 +24,7 @@ public class Bullet : MonoBehaviour
         this.direction = direction;
         this.speed = speed;
         this.activeMode = activeMode;
+        rb2d.bodyType = RigidbodyType2D.Dynamic;
         rb2d.velocity = direction * speed;
         touching = false;
     }
@@ -34,10 +35,6 @@ public class Bullet : MonoBehaviour
         {
             gameObject.layer = 8;
             rb2d.bodyType = RigidbodyType2D.Dynamic;
-            if (touching)
-            {
-                KillPlayer();
-            }
             rb2d.velocity = direction * speed;
         }
         else
@@ -53,7 +50,8 @@ public class Bullet : MonoBehaviour
         {
             if (collision.gameObject.tag == "Player")
             {
-                KillPlayer();
+                Debug.Log("Killing player!");
+                collision.gameObject.GetComponent<PlayerController>().Kill();
             }
 
             BulletPool.Instance.StoreBullet(gameObject);
@@ -63,11 +61,6 @@ public class Bullet : MonoBehaviour
     void OnCollisionExit2D(Collision2D collision)
     {
         touching = false;
-    }
-
-    private void KillPlayer()
-    {
-        
     }
 
 }
