@@ -17,6 +17,7 @@ public class LongLaser : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GlobalSwitch.SwitchModes += Freeze;
         StartCoroutine(MainRoutine());
     }
 
@@ -24,6 +25,21 @@ public class LongLaser : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void Freeze(SwitchMode newMode)
+    {
+        BoxCollider2D collider = GetComponent<BoxCollider2D>();
+        if ((newMode & activeMode) > 0)
+        {
+            collider.isTrigger = true;
+            gameObject.layer = 0; //Default
+        }
+        else
+        {
+            collider.isTrigger = false;
+            gameObject.layer = 9; //Semisolid
+        }
     }
 
     IEnumerator MainRoutine()
@@ -147,5 +163,24 @@ public class LongLaser : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position + (Vector3)(direction.normalized * 2));
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag.Equals("Player"))
+        {
+            Debug.Log("Killing player!");
+            collision.GetComponent<PlayerController>().Kill();
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Player"))
+        {
+            Debug.Log("Touched the player!");
+        }
+    }
+
+
 
 }
