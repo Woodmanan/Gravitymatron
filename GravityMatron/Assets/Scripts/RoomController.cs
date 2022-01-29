@@ -24,7 +24,8 @@ public class RoomController : MonoBehaviour
 
     public void ExitPrevious()
     {
-        currentRoom.ExitRoom();
+        currentRoom?.ExitRoom();
+        currentRoom = null;
     }
 
 }
