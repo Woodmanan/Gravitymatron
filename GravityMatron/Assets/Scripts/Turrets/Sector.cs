@@ -9,6 +9,8 @@ public class Sector : Turret
 
     public override void Attack()
     {
+        base.Attack();
+
         for (int i = 0; i < num; i++)
         {
             float bulletAngle = -sectorAngle / 2;
