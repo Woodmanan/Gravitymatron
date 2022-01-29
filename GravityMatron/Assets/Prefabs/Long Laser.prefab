@@ -105,6 +105,10 @@ MonoBehaviour:
   initialDelay: 0
   holdTime: 5
   repeatAfter: 0
+  activeColor: {r: 1, g: 0, b: 0, a: 1}
+  inactiveColor: {r: 0, g: 0.6779218, b: 1, a: 1}
+  activeGlowIntensity: 3
+  inactiveGlowIntensity: 1
 --- !u!120 &4465384683711174756
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -124,7 +128,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: bf2974103ea1a54458b636f3912f4c81, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

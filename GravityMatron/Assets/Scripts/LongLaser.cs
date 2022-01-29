@@ -15,12 +15,19 @@ public class LongLaser : MonoBehaviour
     public float holdTime;
     public float repeatAfter;
 
+    public Color activeColor;
+    public Color inactiveColor;
+    public float activeGlowIntensity;
+    public float inactiveGlowIntensity;
+
+
     // Start is called before the first frame update
     void Start()
     {
         GlobalSwitch.SwitchModes += Freeze;
         StartCoroutine(MainRoutine());
         GetComponent<LineRenderer>().useWorldSpace = true;
+        Freeze(GlobalSwitch.currentMode);
     }
 
     // Update is called once per frame
@@ -32,15 +39,24 @@ public class LongLaser : MonoBehaviour
     public void Freeze(SwitchMode newMode)
     {
         BoxCollider2D collider = GetComponent<BoxCollider2D>();
+        LineRenderer renderer = GetComponent<LineRenderer>();
         if ((newMode & activeMode) > 0)
         {
             collider.isTrigger = true;
             gameObject.layer = 0; //Default
+            renderer.material.color = activeColor;
+            float factor = Mathf.Pow(2f, activeGlowIntensity);
+            Color bright = new Color(activeColor.r * factor, activeColor.g * factor, activeColor.b * factor);
+            renderer.material.SetColor("_EmissionColor", bright);
         }
         else
         {
             collider.isTrigger = false;
             gameObject.layer = 10; //Semisolid
+            renderer.material.color = inactiveColor;
+            float factor = Mathf.Pow(2f, inactiveGlowIntensity);
+            Color bright = new Color(inactiveColor.r * factor, inactiveColor.g * factor, inactiveColor.b * factor);
+            renderer.material.SetColor("_EmissionColor", bright);
         }
     }
 

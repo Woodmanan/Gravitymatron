@@ -16,10 +16,15 @@ public class LaserBeam : MonoBehaviour
 
     private bool setup = false;
 
+    public Color activeColor;
+    public Color inactiveColor;
+    public float activeGlowIntensity;
+    public float inactiveGlowIntensity;
+
     // Start is called before the first frame update
     void Start()
     {
-        Setup();
+        Freeze(GlobalSwitch.currentMode);
     }
 
     void Setup()
@@ -115,15 +120,24 @@ public class LaserBeam : MonoBehaviour
     public void Freeze(SwitchMode newMode)
     {
         Setup();
+        
         if ((newMode & activeMode) > 0)
         {
             collider.isTrigger = true;
             gameObject.layer = 0; //Default
+            renderer.material.color = activeColor;
+            float factor = Mathf.Pow(2f, activeGlowIntensity);
+            Color bright = new Color(activeColor.r * factor, activeColor.g * factor, activeColor.b * factor);
+            renderer.material.SetColor("_EmissionColor", bright);
         }
         else
         {
             collider.isTrigger = false;
             gameObject.layer = 10; //Semisolid
+            renderer.material.color = inactiveColor;
+            float factor = Mathf.Pow(2f, inactiveGlowIntensity);
+            Color bright = new Color(inactiveColor.r * factor, inactiveColor.g * factor, inactiveColor.b * factor);
+            renderer.material.SetColor("_EmissionColor", bright);
         }
     }
 
