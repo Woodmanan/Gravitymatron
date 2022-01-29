@@ -32,6 +32,7 @@ public class Bullet : MonoBehaviour
     {
         if (newMode == activeMode)
         {
+            rb2d.bodyType = RigidbodyType2D.Dynamic;
             if (touching)
             {
                 KillPlayer();
@@ -40,7 +41,7 @@ public class Bullet : MonoBehaviour
         }
         else
         {
-            rb2d.velocity = Vector2.zero;
+            rb2d.bodyType = RigidbodyType2D.Static;
         }
     }
 
@@ -48,7 +49,12 @@ public class Bullet : MonoBehaviour
     {
         if (GlobalSwitch.currentMode == activeMode)
         {
-            KillPlayer();
+            if (collision.gameObject.tag == "Player")
+            {
+                KillPlayer();
+            }
+
+            BulletPool.Instance.StoreBullet(gameObject);
         }
     }
 
@@ -59,7 +65,7 @@ public class Bullet : MonoBehaviour
 
     private void KillPlayer()
     {
-
+        
     }
 
 }

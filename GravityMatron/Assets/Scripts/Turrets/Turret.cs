@@ -5,11 +5,10 @@ using UnityEngine;
 
 public abstract class Turret : MonoBehaviour
 {
-    public GameObject bullet;
     public float bulletSpeed;
     public SwitchMode activeMode;
     public bool followPlayer;
-    public float speed;
+    public float rotationSpeed;
 
     private GameObject target;
     private Transform firePosition;
@@ -20,6 +19,7 @@ public abstract class Turret : MonoBehaviour
     void Start()
     {
         firePosition = transform.GetChild(0);
+        target = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -46,7 +46,7 @@ public abstract class Turret : MonoBehaviour
         }
         else
         {
-            angle -= speed;
+            angle -= rotationSpeed;
             if (angle > 2 * 3.1416)
             {
                 angle = 0;
@@ -58,7 +58,7 @@ public abstract class Turret : MonoBehaviour
 
     public void FireBullet(float addedAngle)
     {
-        GameObject newBullet = Instantiate(bullet);
+        GameObject newBullet = BulletPool.Instance.GetBullet();
         newBullet.transform.position = firePosition.position;
 
         float outAngle = angle + addedAngle;

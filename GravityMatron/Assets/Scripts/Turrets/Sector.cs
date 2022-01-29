@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Sector : Turret
 {
-    public float angle;
+    public float sectorAngle;
     public int num;
 
     public override void Attack()
     {
         for (int i = 0; i < num; i++)
         {
-            float bulletAngle = - angle / 2;
-            bulletAngle += angle * i / num;
+            float bulletAngle = -sectorAngle / 2;
+            bulletAngle += sectorAngle * i / num;
             FireBullet(bulletAngle);
         }
     }
