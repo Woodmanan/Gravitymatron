@@ -28,6 +28,7 @@ public class Room : MonoBehaviour
     {
         // Exit previous room
         RoomController.Instance.ExitPrevious();
+        RoomController.Instance.currentRoom = this;
 
         // Snap camera to room
         var pos = transform.position;

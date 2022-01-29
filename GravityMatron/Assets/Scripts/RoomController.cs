@@ -13,6 +13,7 @@ public class RoomController : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        currentRoom = rooms[0].GetComponent<Room>();
     }
 
     public void Teleport()
@@ -24,8 +25,8 @@ public class RoomController : MonoBehaviour
 
     public void ExitPrevious()
     {
-        currentRoom?.ExitRoom();
-        currentRoom = null;
+        Debug.Log(currentRoom);
+        currentRoom.ExitRoom();
     }
 
 }
