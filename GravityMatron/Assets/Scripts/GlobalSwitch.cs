@@ -6,12 +6,22 @@ using UnityEngine.Events;
 public class GlobalSwitch 
 {
     public static UnityAction<SwitchMode> SwitchModes;
-    public static SwitchMode currentMode;
+    public static SwitchMode currentMode = SwitchMode.TopDown;
 
+    static GlobalSwitch()
+    {
+        SwitchModes += OnSwitchMode;
+    }
+    
     public static void SwitchModeTo(SwitchMode mode)
     {
         currentMode = mode;
-        SwitchModes.Invoke(mode);
+        SwitchModes?.Invoke(mode);
+    }
+
+    private static void OnSwitchMode(SwitchMode to)
+    {
+        Debug.Log($"Mode switched to {to}");
     }
 }
 

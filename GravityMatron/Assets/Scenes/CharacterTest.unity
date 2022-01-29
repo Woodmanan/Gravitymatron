@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 170528891}
   - component: {fileID: 170528890}
   - component: {fileID: 170528889}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -446,9 +446,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc2ac6e607980cb468b59dda3953bd49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 5
-  gravity: 0
-  jumpKey: 0
+  maxSpeed: 10
+  jumpSpeed: 25
+  jumpKey: 32
+  switchModeKey: 101
 --- !u!50 &1010805719
 Rigidbody2D:
   serializedVersion: 4
@@ -464,7 +465,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 20
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
