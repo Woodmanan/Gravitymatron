@@ -78,21 +78,21 @@ public class LaserBeam : MonoBehaviour
         //Initial spawning
         for (float currentLength = 0; currentLength < length; currentLength += speed * Time.deltaTime)
         {
-            SetPoints(startPoint, startPoint + direction * currentLength);
+            SetPoints(startPoint, startPoint + direction * currentLength, direction);
             yield return null;
         }
 
         //Laser is fully extended, move it across the screen
         for (float traveledDistance = 0; traveledDistance < distance - length; traveledDistance += speed * Time.deltaTime)
         {
-            SetPoints(startPoint + direction * traveledDistance, startPoint + direction * (traveledDistance + length));
+            SetPoints(startPoint + direction * traveledDistance, startPoint + direction * (traveledDistance + length), direction);
             yield return null;
         }
 
         //Laser has reached the back wall, collapse it now
         for (float currentLength = length; currentLength > 0; currentLength -= speed * Time.deltaTime)
         {
-            SetPoints(startPoint + direction * (distance - currentLength), startPoint + direction * distance);
+            SetPoints(startPoint + direction * (distance - currentLength), startPoint + direction * distance, direction);
             yield return null;
         }
 
@@ -101,7 +101,7 @@ public class LaserBeam : MonoBehaviour
         GlobalSwitch.SwitchModes -= Freeze;
     }
 
-    public void SetPoints(Vector2 start, Vector2 end)
+    public void SetPoints(Vector2 start, Vector2 end, Vector2 direction)
     {
         this.start = start;
         this.end = end;
@@ -112,7 +112,7 @@ public class LaserBeam : MonoBehaviour
 
         collider.offset = Vector2.Min(start, end) + offsets / 2;
 
-        offsets = new Vector2(Mathf.Max(offsets.x, width), Mathf.Max(offsets.y, width));
+        offsets = new Vector2(Mathf.Max(offsets.x, width * (1 - direction.x)), Mathf.Max(offsets.y, width * (1 - direction.y)));
 
         collider.size = offsets;
     }

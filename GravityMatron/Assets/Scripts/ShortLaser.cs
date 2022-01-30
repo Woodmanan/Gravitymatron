@@ -8,6 +8,10 @@ public class ShortLaser : MonoBehaviour
     public float delayBetweenLasers;
     public float initialDelay;
 
+    public float speed;
+    public float length;
+    public float width;
+
     public float maxDistance;
     public Vector2 direction;
 
@@ -74,7 +78,11 @@ public class ShortLaser : MonoBehaviour
 
             GameObject laserObj = Instantiate(beamPrefab);
             LaserBeam beam = laserObj.GetComponent<LaserBeam>();
-            beam.Fire(start, direction, distance);
+            beam.speed = speed;
+            beam.length = length;
+            beam.width = width;
+            beam.activeMode = activeMode;
+            beam.Fire(start, direction.normalized, distance);
 
             for (float t = 0; t < delayBetweenLasers; t += Time.deltaTime)
             {
