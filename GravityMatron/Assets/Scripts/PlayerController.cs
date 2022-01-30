@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
             case SwitchMode.TopDown:
                 _body.gravityScale = 0.0f;
                 _anim.SetBool("SideOrTop", true);
+                _anim.SetFloat("Walking", (x != 0.0f || y != 0.0f) ? 1.0f : 0.0f);
                 if (x != 0.0 || y != 0.0)
                 {
                     _anim.SetFloat("Direction", Mathf.Rad2Deg * Mathf.Atan2(y, x));
