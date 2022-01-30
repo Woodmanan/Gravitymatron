@@ -26,10 +26,12 @@ public class Room : MonoBehaviour
 
     public void EnterRoom()
     {
-        // Exit previous room
-        RoomController.Instance.ExitPrevious();
-        RoomController.Instance.currentRoom = this;
+        // Switches Room
+        RoomController.Instance.SwitchRoom(this);
+    }
 
+    public void PrepRoom()
+    {
         // Snap camera to room
         var pos = transform.position;
         var cameraTransform = _camera.transform;
