@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+    public static SceneController singleton;
     public bool DDOL = true;
     public int firstSceneIndex;
     public void MoveToScene(int scene)
@@ -36,6 +37,7 @@ public class SceneController : MonoBehaviour
         {
             DontDestroyOnLoad(this.gameObject);
         }
+        singleton = this;
     }
 
     // Update is called once per frame
