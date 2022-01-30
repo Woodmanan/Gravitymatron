@@ -25,6 +25,7 @@ public abstract class Turret : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player");
         playerController = target.GetComponent<PlayerController>();
         timePassed = 0;
+        angle = (transform.rotation.eulerAngles.z + 90.0f) * Mathf.Deg2Rad;
     }
 
     // Update is called once per frame
