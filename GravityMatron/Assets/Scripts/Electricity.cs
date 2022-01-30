@@ -18,6 +18,7 @@ public class Electricity : MonoBehaviour
     void Start()
     {
         GlobalSwitch.SwitchModes += Switch;
+        Switch(GlobalSwitch.currentMode);
     }
 
     // Update is called once per frame
