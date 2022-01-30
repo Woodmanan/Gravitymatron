@@ -24,6 +24,7 @@ public class LongLaser : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Starting Call!");
         GlobalSwitch.SwitchModes += Freeze;
         StartCoroutine(MainRoutine());
         GetComponent<LineRenderer>().useWorldSpace = true;
