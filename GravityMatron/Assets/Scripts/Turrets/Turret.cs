@@ -41,7 +41,7 @@ public abstract class Turret : MonoBehaviour
         {
             timePassed = 0;
             float distance = Mathf.Abs(target.transform.position.y - transform.position.y);
-            if (playerController.canToggleModes || distance < 14)
+            if (playerController.canToggleModes || distance < 14 || (!followPlayer && rotationSpeed == 0))
             {
                 Attack();
             }
