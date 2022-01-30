@@ -63,3 +63,6 @@ crashlytics-build.properties
 
 #.DS_Store
 .DS_Store
+
+#User Preference
+EditorUserSettings.asset
