@@ -207,6 +207,7 @@ MonoBehaviour:
   flipToSideSound: {fileID: 8300000, guid: d6df79dc9d63c924f99de8f0d43e2d90, type: 3}
   flipOTronicSound: {fileID: 8300000, guid: 9866a93f19da1481ebde9dc37609b80f, type: 3}
   deathSound: {fileID: 8300000, guid: cdff86b799dd54c87b8898107b25e540, type: 3}
+  jumpSound: {fileID: 8300000, guid: 073a5a15aa509bb4bbe8ff0262f2a7cd, type: 3}
 --- !u!82 &5799899523593416886
 AudioSource:
   m_ObjectHideFlags: 0

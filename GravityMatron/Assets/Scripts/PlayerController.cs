@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip flipToSideSound;
     [SerializeField] private AudioClip flipOTronicSound;
     [SerializeField] private AudioClip deathSound;
+    [SerializeField] private AudioClip jumpSound;
 
     private Rigidbody2D _body;
     private Animator _anim;
@@ -65,6 +66,8 @@ public class PlayerController : MonoBehaviour
                 {
                     if (y >= -.1f)
                     {
+                        _audio.clip = jumpSound;
+                        _audio.Play();
                         vy = jumpSpeed;
                     }
                 }
