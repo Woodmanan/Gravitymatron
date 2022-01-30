@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class CameraLookZone : MonoBehaviour
 {
+    public bool setFollow;
+    
     private CameraInterpolate _cam;
 
     private void Start()
@@ -14,8 +16,14 @@ public class CameraLookZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            var pos = transform.position;
-            _cam.targetPosition = new Vector3(pos.x, pos.y, _cam.targetPosition.z);
+            // Just set follow to true if setFollow, otherwise set target position
+            _cam.follow = setFollow;
+            
+            if (!setFollow)
+            {
+                var pos = transform.position;
+                _cam.targetPosition = new Vector3(pos.x, pos.y, _cam.targetPosition.z);
+            }
         }
     }
 }
