@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
                     if (y >= -.1f)
                     {
                         _audio.clip = jumpSound;
-                        _audio.volume = 1;
+                        _audio.volume = 0.6f;
                         _audio.Play();
                         vy = jumpSpeed;
                     }
