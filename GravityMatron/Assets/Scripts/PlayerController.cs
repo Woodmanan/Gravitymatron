@@ -12,16 +12,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private KeyCode jumpKey;
     [SerializeField] private KeyCode switchModeKey;
     [SerializeField] private KeyCode respawnKey;
+    [SerializeField] private AudioClip flipToTopSound;
+    [SerializeField] private AudioClip flipToSideSound;
+    [SerializeField] private AudioClip flipOTronicSound;
+    [SerializeField] private AudioClip deathSound;
 
     private Rigidbody2D _body;
     private Animator _anim;
+    private AudioSource _audio;
     private float _gravity;
     private float _phaseTime;
 
     private void Start()
     {
+        GlobalSwitch.SwitchModes += PlayFlipSound;
+        
         _body = GetComponent<Rigidbody2D>();
         _anim = transform.GetChild(0).GetComponent<Animator>();
+        _audio = GetComponent<AudioSource>();
         _gravity = _body.gravityScale;
         respawnPosition = transform.position;
     }
@@ -108,6 +116,31 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void PickUpFlipOTronic()
+    {
+        canToggleModes = true;
+        _audio.clip = flipOTronicSound;
+        _audio.volume = 0.12f;
+        _audio.Play();
+    }
+
+    private void PlayFlipSound(SwitchMode mode)
+    {
+        switch (mode)
+        {
+            case SwitchMode.SideScroller:
+                _audio.clip = flipToSideSound;
+                _audio.volume = 1;
+                _audio.Play();
+                break;
+            case SwitchMode.TopDown:
+                _audio.clip = flipToTopSound;
+                _audio.volume = 1;
+                _audio.Play();
+                break;
+        }
+    }
+
     private bool IsGrounded()
     {
         return Physics2D.BoxCast(
@@ -134,8 +167,9 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = respawnPosition;
         _body.velocity = Vector2.zero;
+        _audio.clip = deathSound;
+        _audio.volume = 0.25f;
+        _audio.Play();
         // GlobalSwitch.SwitchModeTo(SwitchMode.TopDown);
     }
-
-
 }

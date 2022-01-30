@@ -9,8 +9,8 @@ public class GravityMatron : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.GetComponent<PlayerController>().canToggleModes = true;
             GlobalSwitch.SwitchModeTo(SwitchMode.SideScroller);
+            other.GetComponent<PlayerController>().PickUpFlipOTronic();
             Destroy(destroyObject);
             Destroy(gameObject);
         }
