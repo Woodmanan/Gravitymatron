@@ -12,16 +12,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private KeyCode jumpKey;
     [SerializeField] private KeyCode switchModeKey;
     [SerializeField] private KeyCode respawnKey;
+    [SerializeField] private AudioClip flipToTopSound;
+    [SerializeField] private AudioClip flipToSideSound;
 
     private Rigidbody2D _body;
     private Animator _anim;
+    private AudioSource _audio;
     private float _gravity;
     private float _phaseTime;
 
     private void Start()
     {
+        GlobalSwitch.SwitchModes += PlayFlipSound;
+        
         _body = GetComponent<Rigidbody2D>();
         _anim = transform.GetChild(0).GetComponent<Animator>();
+        _audio = GetComponent<AudioSource>();
         _gravity = _body.gravityScale;
         respawnPosition = transform.position;
     }
@@ -108,6 +114,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void PlayFlipSound(SwitchMode mode)
+    {
+        switch (mode)
+        {
+            case SwitchMode.SideScroller:
+                _audio.clip = flipToSideSound;
+                _audio.Play();
+                break;
+            case SwitchMode.TopDown:
+                _audio.clip = flipToTopSound;
+                _audio.Play();
+                break;
+        }
+    }
+
     private bool IsGrounded()
     {
         return Physics2D.BoxCast(
@@ -136,6 +157,4 @@ public class PlayerController : MonoBehaviour
         _body.velocity = Vector2.zero;
         // GlobalSwitch.SwitchModeTo(SwitchMode.TopDown);
     }
-
-
 }
