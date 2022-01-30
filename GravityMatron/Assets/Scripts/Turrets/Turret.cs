@@ -31,7 +31,7 @@ public abstract class Turret : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GlobalSwitch.currentMode == activeMode)
+        if ((GlobalSwitch.currentMode & activeMode) > 0)
         {
             timePassed += Time.deltaTime;
             Rotate();
