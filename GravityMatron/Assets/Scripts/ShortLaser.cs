@@ -64,12 +64,12 @@ public class ShortLaser : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position, direction, maxDistance, LayerMask.GetMask(new string[] { "Jumpable", "Wall" }));
             if (hit.collider)
             {
-                Debug.Log($"Hit! Distance is {hit.distance}");
+                Debug.Log($"Hit! Distance is {hit.distance}", this);
                 distance = hit.distance;
             }
             else
             {
-                Debug.LogError("Lasers should be aimed at walls!");
+                Debug.LogError("Lasers should be aimed at walls!", this);
                 distance = maxDistance;
             }
 

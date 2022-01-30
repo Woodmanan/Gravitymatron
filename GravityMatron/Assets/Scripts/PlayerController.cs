@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
                 _body.gravityScale = _gravity;
                 _anim.SetBool("SideOrTop", false);
                 _anim.SetFloat("Walking", x != 0.0f ? 1.0f : 0.0f);
-                if (x != 0.0)
+                if (x != 0.0f)
                 {
                     _anim.SetBool("LeftOrRight", x > 0.0f);
                 }
@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
                     if (y >= -.1f)
                     {
                         _audio.clip = jumpSound;
+                        _audio.volume = 1;
                         _audio.Play();
                         vy = jumpSpeed;
                     }

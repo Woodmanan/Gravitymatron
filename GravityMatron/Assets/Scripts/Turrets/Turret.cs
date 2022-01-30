@@ -31,7 +31,7 @@ public abstract class Turret : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GlobalSwitch.currentMode == activeMode)
+        if ((GlobalSwitch.currentMode & activeMode) > 0)
         {
             timePassed += Time.deltaTime;
             Rotate();
@@ -41,7 +41,7 @@ public abstract class Turret : MonoBehaviour
         {
             timePassed = 0;
             float distance = Mathf.Abs(target.transform.position.y - transform.position.y);
-            if (playerController.canToggleModes || distance < 14)
+            if (playerController.canToggleModes || distance < 14 || (!followPlayer && rotationSpeed == 0))
             {
                 Attack();
             }
