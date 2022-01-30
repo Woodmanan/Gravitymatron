@@ -16,17 +16,14 @@ public class CameraLookZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            var pos = transform.position;
-            _cam.targetPosition = new Vector3(pos.x, pos.y, _cam.targetPosition.z);
-            _cam.follow = false;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player") && setFollow)
-        {
-            _cam.follow = true;
+            // Just set follow to true if setFollow, otherwise set target position
+            _cam.follow = setFollow;
+            
+            if (!setFollow)
+            {
+                var pos = transform.position;
+                _cam.targetPosition = new Vector3(pos.x, pos.y, _cam.targetPosition.z);
+            }
         }
     }
 }
