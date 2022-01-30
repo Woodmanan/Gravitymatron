@@ -26,11 +26,6 @@ public class BulletPool : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public GameObject GetBullet()
     {

@@ -18,15 +18,20 @@ public class RoomController : MonoBehaviour
 
     public void Teleport()
     {
-        ExitPrevious();
-        currentRoom = rooms[roomNum].GetComponent<Room>();
-        currentRoom.EnterRoom();
+        SwitchRoom(rooms[roomNum].GetComponent<Room>());
     }
 
-    public void ExitPrevious()
+    public void SwitchRoom(Room room)
     {
-        Debug.Log(currentRoom);
+        if (currentRoom == room)
+        {
+            return;
+        }
+
         currentRoom.ExitRoom();
+        currentRoom = room;
+        currentRoom.PrepRoom();
+
     }
 
 }
