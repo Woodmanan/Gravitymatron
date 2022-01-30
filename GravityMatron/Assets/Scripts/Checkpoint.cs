@@ -6,7 +6,8 @@ public class Checkpoint : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<PlayerController>().respawnPosition = transform.position;
+            var pos = transform.position;
+            other.GetComponent<PlayerController>().respawnPosition = new Vector3(pos.x, pos.y, 0.0f);
         }
     }
 }
