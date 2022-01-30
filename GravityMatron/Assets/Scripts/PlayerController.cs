@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
                 }
 
                 var vy = _body.velocity.y;
-                if (Input.GetKeyDown(jumpKey) && IsGrounded())
+                if ((Input.GetKeyDown(jumpKey) || Input.GetKeyDown(KeyCode.UpArrow)) && IsGrounded())
                 {
                     if (y >= -.1f)
                     {
@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
                     gameObject.layer = 0; //Default
                 }
 
-                if (Input.GetKey(jumpKey) && y < -.1f)
+                if ((Input.GetKeyDown(jumpKey) || Input.GetKeyDown(KeyCode.UpArrow)) && y < -.1f)
                 {
                     _phaseTime = .2f;
                     
