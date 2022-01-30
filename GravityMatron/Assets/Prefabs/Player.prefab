@@ -201,3 +201,4 @@ MonoBehaviour:
   respawnPosition: {x: 0, y: 0, z: 0}
   jumpKey: 32
   switchModeKey: 101
+  respawnKey: 114

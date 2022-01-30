@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private KeyCode jumpKey;
     [SerializeField] private KeyCode switchModeKey;
+    [SerializeField] private KeyCode respawnKey;
 
     private Rigidbody2D _body;
     private Animator _anim;
@@ -101,7 +102,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(respawnKey))
         {
             Kill();
         }
@@ -133,7 +134,7 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = respawnPosition;
         _body.velocity = Vector2.zero;
-        GlobalSwitch.SwitchModeTo(SwitchMode.TopDown);
+        // GlobalSwitch.SwitchModeTo(SwitchMode.TopDown);
     }
 
 

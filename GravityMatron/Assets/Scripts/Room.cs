@@ -33,7 +33,7 @@ public class Room : MonoBehaviour
         // Snap camera to room
         var pos = transform.position;
         var cameraTransform = _camera.transform;
-        cameraTransform.position = new Vector3(pos.x, pos.y, cameraTransform.position.z);
+        cameraTransform.GetComponent<CameraInterpolate>().targetPosition = new Vector3(pos.x, pos.y, cameraTransform.position.z);
 
         // Set player respawn point
         _player.respawnPosition = _respawnPosition.position;
