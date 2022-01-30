@@ -2655,12 +2655,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AssetsPPU: 16
   m_RefResolutionX: 512
-  m_RefResolutionY: 350
+  m_RefResolutionY: 300
   m_UpscaleRT: 0
   m_PixelSnapping: 0
   m_CropFrameX: 1
   m_CropFrameY: 1
-  m_StretchFill: 0
+  m_StretchFill: 1
 --- !u!114 &1563924188
 MonoBehaviour:
   m_ObjectHideFlags: 0
