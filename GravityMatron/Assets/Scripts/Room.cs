@@ -26,14 +26,16 @@ public class Room : MonoBehaviour
 
     public void EnterRoom()
     {
-        // Exit previous room
-        RoomController.Instance.ExitPrevious();
-        RoomController.Instance.currentRoom = this;
+        // Switches Room
+        RoomController.Instance.SwitchRoom(this);
+    }
 
+    public void PrepRoom()
+    {
         // Snap camera to room
         var pos = transform.position;
         var cameraTransform = _camera.transform;
-        cameraTransform.position = new Vector3(pos.x, pos.y, cameraTransform.position.z);
+        cameraTransform.GetComponent<CameraInterpolate>().targetPosition = new Vector3(pos.x, pos.y, cameraTransform.position.z);
 
         // Set player respawn point
         _player.respawnPosition = _respawnPosition.position;
